@@ -18,6 +18,11 @@ angular.module('healthPlanPickerApp').controller(
 						$scope.healthPlan = result;
 					});
 			$scope.$on('$destroy', unsubscribe);
+			
+			//for the chart
+			$scope.labels = ["Amounts"];
+			$scope.data = [[$scope.healthPlan.deductible], [$scope.healthPlan.oopMax]];
+			$scope.series = [["Deductible"], ["OOP Max"]];
 
 			//This function also exists in the java object			
 			$scope.annualCost = function(){

@@ -7,7 +7,7 @@ angular.module(
 				// jhipster-needle-angularjs-add-module JHipster will add new
 				// module
 				'ui.bootstrap', 'ui.router', 'infinite-scroll',
-				'angular-loading-bar' ])
+				'angular-loading-bar', 'chart.js'])
 
 .run(
 		function($rootScope, $location, $window, $http, $state, Auth,
