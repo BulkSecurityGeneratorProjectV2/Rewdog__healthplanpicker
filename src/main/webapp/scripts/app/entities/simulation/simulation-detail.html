@@ -46,6 +46,16 @@
                     </span>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <span>Annual Cost Before Simulation</span>
+                </td>
+                <td>
+                    <span ng-repeat="healthplansimulation in simulation.healthplansimulations">
+                        <a class="form-control-static" ui-sref="healthPlan.detail({id: {{healthplansimulation.id}}})">{{healthplansimulation.name}}</a>{{$last ? '' : ', '}}
+                    </span>
+                </td>
+            </tr>            
             </tbody>
         </table>
     </div>
