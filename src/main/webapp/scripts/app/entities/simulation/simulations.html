@@ -1,0 +1,64 @@
+<div>
+    <h2>Simulations</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="simulation.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Simulation</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Name</span></th>
+                    <th><span>usersimulation</span></th>
+                    <th><span>healthplansimulation</span></th>
+                    <th><span>scenariosimulation</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="simulation in simulations track by simulation.id">
+                    <td><a ui-sref="simulation.detail({id:simulation.id})">{{simulation.id}}</a></td>
+                    <td>{{simulation.name}}</td>
+                    <td>
+                        {{simulation.usersimulation.login}}
+                    </td>
+                    <td>
+                        <span ng-repeat="healthplansimulation in simulation.healthplansimulations">
+                            <a class="form-control-static" ui-sref="healthPlan.detail({id: {{healthplansimulation.id}}})">{{healthplansimulation.name}}</a>{{$last ? '' : ', '}}
+                        <span>
+                    </td>
+                    <td>
+                        <span ng-repeat="scenariosimulation in simulation.scenariosimulations">
+                            <a class="form-control-static" ui-sref="scenario.detail({id: {{scenariosimulation.id}}})">{{scenariosimulation.name}}</a>{{$last ? '' : ', '}}
+                        <span>
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="simulation.detail({id:simulation.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="simulation.edit({id:simulation.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="simulation.delete({id:simulation.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

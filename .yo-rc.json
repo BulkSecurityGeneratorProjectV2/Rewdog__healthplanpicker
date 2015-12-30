@@ -1,0 +1,24 @@
+{
+  "generator-jhipster": {
+    "baseName": "HealthPlanPicker",
+    "packageName": "com.makesnocents.healthplanpicker",
+    "packageFolder": "com/makesnocents/healthplanpicker",
+    "authenticationType": "session",
+    "hibernateCache": "ehcache",
+    "clusteredHttpSession": "no",
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": "no",
+    "useSass": false,
+    "buildTool": "maven",
+    "frontendBuilder": "grunt",
+    "enableTranslation": false,
+    "enableSocialSignIn": false,
+    "rememberMeKey": "8b5ac7bf36c645f1a7c85c19697065b74f23810d",
+    "testFrameworks": [
+      "gatling"
+    ]
+  }
+}

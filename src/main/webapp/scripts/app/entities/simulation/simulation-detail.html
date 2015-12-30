@@ -1,0 +1,58 @@
+
+<div>
+    <h2><span>Simulation</span> {{simulation.id}}</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <span>Name</span>
+                </td>
+                <td>
+                    <span class="form-control-static">{{simulation.name}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>usersimulation</span>
+                </td>
+                <td>
+                    {{simulation.usersimulation.login}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>healthplansimulation</span>
+                </td>
+                <td>
+                    <span ng-repeat="healthplansimulation in simulation.healthplansimulations">
+                        <a class="form-control-static" ui-sref="healthPlan.detail({id: {{healthplansimulation.id}}})">{{healthplansimulation.name}}</a>{{$last ? '' : ', '}}
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span>scenariosimulation</span>
+                </td>
+                <td>
+                    <span ng-repeat="scenariosimulation in simulation.scenariosimulations">
+                        <a class="form-control-static" ui-sref="scenario.detail({id: {{scenariosimulation.id}}})">{{scenariosimulation.name}}</a>{{$last ? '' : ', '}}
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button type="submit"
+            onclick="window.history.back()"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+</div>

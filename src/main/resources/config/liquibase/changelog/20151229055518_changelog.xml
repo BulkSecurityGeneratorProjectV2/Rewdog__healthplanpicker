@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+   <changeSet author="acapobi (generated)" id="1451368524139-1">
+      <createTable tableName="health_plan">
+         <column autoIncrement="true" name="id" type="BIGINT">
+            <constraints primaryKey="true" primaryKeyName="health_planPK"/>
+         </column>
+         <column name="coinsurance" type="FLOAT8"/>
+         <column name="copay_er" type="NUMBER(10, 2)"/>
+         <column name="copay_pcp" type="NUMBER(10, 2)"/>
+         <column name="copay_pharmacy" type="NUMBER(10, 2)"/>
+         <column name="deductible" type="NUMBER(10, 2)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="employer_hsacontribution" type="NUMBER(10, 2)"/>
+         <column name="name" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="oop_max" type="NUMBER(10, 2)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="premium" type="NUMBER(10, 2)"/>
+         <column name="premium_frequency" type="VARCHAR(255)"/>
+         <column name="type" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="user_id" type="BIGINT"/>
+      </createTable>
+   </changeSet>
+   <changeSet author="acapobi (generated)" id="1451368524139-2">
+      <createTable tableName="scenario">
+         <column autoIncrement="true" name="id" type="BIGINT">
+            <constraints primaryKey="true" primaryKeyName="scenarioPK"/>
+         </column>
+         <column name="cost" type="NUMBER(10, 2)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="frequency" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="name" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="type" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+      </createTable>
+   </changeSet>
+   <changeSet author="acapobi (generated)" id="1451368524139-3">
+      <createTable tableName="simulation">
+         <column autoIncrement="true" name="id" type="BIGINT">
+            <constraints primaryKey="true" primaryKeyName="simulationPK"/>
+         </column>
+         <column name="name" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="usersimulation_id" type="BIGINT"/>
+      </createTable>
+   </changeSet>
+   <changeSet author="acapobi (generated)" id="1451368524139-4">
+      <createTable tableName="simulation_healthplansimulation">
+         <column name="simulations_id" type="BIGINT">
+            <constraints nullable="false"/>
+         </column>
+         <column name="healthplansimulations_id" type="BIGINT">
+            <constraints nullable="false"/>
+         </column>
+      </createTable>
+   </changeSet>
+   <changeSet author="acapobi (generated)" id="1451368524139-5">
+      <createTable tableName="simulation_scenariosimulation">
+         <column name="simulations_id" type="BIGINT">
+            <constraints nullable="false"/>
+         </column>
+         <column name="scenariosimulations_id" type="BIGINT">
+            <constraints nullable="false"/>
+         </column>
+      </createTable>
+   </changeSet>
+   <changeSet author="acapobi (generated)" id="1451368524139-6">
+      <addPrimaryKey columnNames="simulations_id, healthplansimulations_id"
+                     tableName="simulation_healthplansimulation"/>
+   </changeSet>
+   <changeSet author="acapobi (generated)" id="1451368524139-7">
+      <addPrimaryKey columnNames="simulations_id, scenariosimulations_id"
+                     tableName="simulation_scenariosimulation"/>
+   </changeSet>
+   <changeSet author="acapobi (generated)" id="1451368524139-8">
+      <addForeignKeyConstraint baseColumnNames="usersimulation_id"
+                               baseTableName="simulation"
+                               constraintName="FK_6i9mu14ab3351pghnj2nm65g0"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="acapobi (generated)" id="1451368524139-9">
+      <addForeignKeyConstraint baseColumnNames="user_id"
+                               baseTableName="health_plan"
+                               constraintName="FK_c34t1id3n0xoaiqre0rcaebc2"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="acapobi (generated)" id="1451368524139-10">
+      <addForeignKeyConstraint baseColumnNames="scenariosimulations_id"
+                               baseTableName="simulation_scenariosimulation"
+                               constraintName="FK_d145n1k62lkslb9qr9uxhybhe"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="scenario"/>
+   </changeSet>
+   <changeSet author="acapobi (generated)" id="1451368524139-11">
+      <addForeignKeyConstraint baseColumnNames="healthplansimulations_id"
+                               baseTableName="simulation_healthplansimulation"
+                               constraintName="FK_m3dcmt01wopty2xda0uaevwj0"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="health_plan"/>
+   </changeSet>
+   <changeSet author="acapobi (generated)" id="1451368524139-12">
+      <addForeignKeyConstraint baseColumnNames="simulations_id"
+                               baseTableName="simulation_scenariosimulation"
+                               constraintName="FK_mshflf4muj3hbwg2okgxnffuo"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="simulation"/>
+   </changeSet>
+   <changeSet author="acapobi (generated)" id="1451368524139-13">
+      <addForeignKeyConstraint baseColumnNames="simulations_id"
+                               baseTableName="simulation_healthplansimulation"
+                               constraintName="FK_niaq4dyhuvx4e3oryax7x14oc"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="simulation"/>
+   </changeSet>
+   <changeSet author="acapobi (generated)" id="1451368524139-14">
+      <dropSequence sequenceName="jhi_persistent_audit_event_event_id_seq"/>
+   </changeSet>
+   <changeSet author="acapobi (generated)" id="1451368524139-15">
+      <dropSequence sequenceName="jhi_user_id_seq"/>
+   </changeSet>
+</databaseChangeLog>

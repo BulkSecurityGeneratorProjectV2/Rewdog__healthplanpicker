@@ -1,0 +1,187 @@
+
+<form name="editForm" role="form" novalidate ng-submit="save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myHealthPlanLabel">Create or edit a HealthPlan</h4>
+    </div>
+    <div class="modal-body">
+        <jh-alert-error></jh-alert-error>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="healthPlan.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="healthPlan.name"
+                    required />
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.name.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_premium">Premium</label>
+            <input type="number" class="form-control" name="premium" id="field_premium"
+                    ng-model="healthPlan.premium"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_premiumFrequency">PremiumFrequency</label>
+            <select class="form-control" name="premiumFrequency" ng-model="healthPlan.premiumFrequency" id="field_premiumFrequency">
+                <option value="weekly">weekly</option>
+                <option value="biweekly">biweekly</option>
+                <option value="monthly">monthly</option>
+                <option value="annually">annually</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_type">Type</label>
+            <select class="form-control" name="type" ng-model="healthPlan.type" id="field_type" required>
+                <option value="cdhp">cdhp</option>
+                <option value="ppo">ppo</option>
+                <option value="hmo">hmo</option>
+            </select>
+            <div ng-show="editForm.type.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.type.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_deductible">Deductible</label>
+            <input type="number" class="form-control" name="deductible" id="field_deductible"
+                    ng-model="healthPlan.deductible"
+                    required min="0" />
+            <div ng-show="editForm.deductible.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.deductible.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.deductible.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.deductible.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_oopMax">OopMax</label>
+            <input type="number" class="form-control" name="oopMax" id="field_oopMax"
+                    ng-model="healthPlan.oopMax"
+                    required min="0" />
+            <div ng-show="editForm.oopMax.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.oopMax.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.oopMax.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.oopMax.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_coinsurance">Coinsurance</label>
+            <input type="number" class="form-control" name="coinsurance" id="field_coinsurance"
+                    ng-model="healthPlan.coinsurance"
+                    min="0" max="1" />
+            <div ng-show="editForm.coinsurance.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.coinsurance.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.coinsurance.$error.max" translate-value-max="1">
+                    This field cannot be more than 1.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.coinsurance.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_employerHSAContribution">EmployerHSAContribution</label>
+            <input type="number" class="form-control" name="employerHSAContribution" id="field_employerHSAContribution"
+                    ng-model="healthPlan.employerHSAContribution"
+                    min="0" />
+            <div ng-show="editForm.employerHSAContribution.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.employerHSAContribution.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.employerHSAContribution.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_copayPCP">CopayPCP</label>
+            <input type="number" class="form-control" name="copayPCP" id="field_copayPCP"
+                    ng-model="healthPlan.copayPCP"
+                    min="0" />
+            <div ng-show="editForm.copayPCP.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.copayPCP.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.copayPCP.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_copayER">CopayER</label>
+            <input type="number" class="form-control" name="copayER" id="field_copayER"
+                    ng-model="healthPlan.copayER"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_copayPharmacy">CopayPharmacy</label>
+            <input type="number" class="form-control" name="copayPharmacy" id="field_copayPharmacy"
+                    ng-model="healthPlan.copayPharmacy"
+                    min="0" />
+            <div ng-show="editForm.copayPharmacy.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.copayPharmacy.$error.min" translate-value-min="0">
+                    This field should be more than 0.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.copayPharmacy.$error.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_user">user</label>
+            <select class="form-control" id="field_user" name="user" ng-model="healthPlan.user" ng-options="user as user.login for user in users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,54 @@
+<div>
+    <h2>Scenarios</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="scenario.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new Scenario</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Name</span></th>
+                    <th><span>Type</span></th>
+                    <th><span>Cost</span></th>
+                    <th><span>Frequency</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="scenario in scenarios track by scenario.id">
+                    <td><a ui-sref="scenario.detail({id:scenario.id})">{{scenario.id}}</a></td>
+                    <td>{{scenario.name}}</td>
+                    <td translate="{{'healthPlanPickerApp.ScenarioType.' + scenario.type}}">{{scenario.type}}</td>
+                    <td>{{scenario.cost}}</td>
+                    <td translate="{{'healthPlanPickerApp.FrequencyType.' + scenario.frequency}}">{{scenario.frequency}}</td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="scenario.detail({id:scenario.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="scenario.edit({id:scenario.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="scenario.delete({id:scenario.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div>
+    <h2>HealthPlans</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="healthPlan.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span>Create a new HealthPlan</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Name</span></th>
+                    <th><span>Premium</span></th>
+                    <th><span>PremiumFrequency</span></th>
+                    <th><span>Type</span></th>
+                    <th><span>Deductible</span></th>
+                    <th><span>OopMax</span></th>
+                    <th><span>Coinsurance</span></th>
+                    <th><span>EmployerHSAContribution</span></th>
+                    <th><span>CopayPCP</span></th>
+                    <th><span>CopayER</span></th>
+                    <th><span>CopayPharmacy</span></th>
+                    <th><span>user</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="healthPlan in healthPlans track by healthPlan.id">
+                    <td><a ui-sref="healthPlan.detail({id:healthPlan.id})">{{healthPlan.id}}</a></td>
+                    <td>{{healthPlan.name}}</td>
+                    <td>{{healthPlan.premium}}</td>
+                    <td translate="{{'healthPlanPickerApp.PremiumFrequency.' + healthPlan.premiumFrequency}}">{{healthPlan.premiumFrequency}}</td>
+                    <td translate="{{'healthPlanPickerApp.HealthPlanType.' + healthPlan.type}}">{{healthPlan.type}}</td>
+                    <td>{{healthPlan.deductible}}</td>
+                    <td>{{healthPlan.oopMax}}</td>
+                    <td>{{healthPlan.coinsurance}}</td>
+                    <td>{{healthPlan.employerHSAContribution}}</td>
+                    <td>{{healthPlan.copayPCP}}</td>
+                    <td>{{healthPlan.copayER}}</td>
+                    <td>{{healthPlan.copayPharmacy}}</td>
+                    <td>
+                        {{healthPlan.user.login}}
+                    </td>
+                    <td>
+                        <button type="submit"
+                                ui-sref="healthPlan.detail({id:healthPlan.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>&nbsp;<span> View</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="healthPlan.edit({id:healthPlan.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span> Edit</span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="healthPlan.delete({id:healthPlan.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span> Delete</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

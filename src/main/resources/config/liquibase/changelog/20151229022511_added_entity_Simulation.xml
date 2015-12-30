@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="now" value="now()" dbms="mysql,h2"/>
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+    <property name="now" value="sysdate" dbms="oracle"/>
+
+    <property name="autoIncrement" value="true" dbms="mysql,h2,postgresql,oracle"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle"/>
+
+    <!--
+        Added the entity Simulation.
+    -->
+    <changeSet id="20151229022511" author="jhipster">
+        <createTable tableName="simulation">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="usersimulation_id" type="bigint"/>
+        </createTable>
+        
+        <addForeignKeyConstraint baseColumnNames="usersimulation_id"
+                                 baseTableName="simulation"
+                                 constraintName="fk_simulation_usersimulation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <createTable tableName="simulation_healthplansimulation">
+            <column name="healthplansimulations_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="simulations_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="simulations_id, healthplansimulations_id" tableName="simulation_healthplansimulation"/>
+
+        <addForeignKeyConstraint baseColumnNames="simulations_id"
+                                 baseTableName="simulation_healthplansimulation"
+                                 constraintName="fk_simulation_healthplansimulation_healthplan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="simulation"/>
+
+        <addForeignKeyConstraint baseColumnNames="healthplansimulations_id"
+                                 baseTableName="simulation_healthplansimulation"
+                                 constraintName="fk_simulation_healthplansimulation_simulation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="health_plan"/>
+        
+        <createTable tableName="simulation_scenariosimulation">
+            <column name="scenariosimulations_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="simulations_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="simulations_id, scenariosimulations_id" tableName="simulation_scenariosimulation"/>
+
+        <addForeignKeyConstraint baseColumnNames="simulations_id"
+                                 baseTableName="simulation_scenariosimulation"
+                                 constraintName="fk_simulation_scenariosimulation_scenario_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="simulation"/>
+
+        <addForeignKeyConstraint baseColumnNames="scenariosimulations_id"
+                                 baseTableName="simulation_scenariosimulation"
+                                 constraintName="fk_simulation_scenariosimulation_simulation_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="scenario"/>
+        
+    </changeSet>
+</databaseChangeLog>
