@@ -20,6 +20,19 @@ angular.module('healthPlanPickerApp')
         	return $scope.simulation.healthplansimulations[0].annualCost + total;
         };
         
+        $scope.cumulativeAnnualCost = function(){
+            var cumulativeCosts = [];
+            var total = 0;
+            for(var i = 0; i < $scope.simulation.scenariosimulations.length; i++)
+            {
+                var scenario = $scope.simulation.scenariosimulations[i];
+                total += scenario.annualCost;
+                cumulativeCosts.push(total);
+            }            
+        	
+        	return cumulativeCosts;
+        };
+        
         var unsubscribe = $rootScope.$on('healthPlanPickerApp:simulationUpdate', function(event, result) {
             $scope.simulation = result;
         });

@@ -76,9 +76,19 @@
             </tr>                                 
             </tbody>
         </table>
-    </div>
+    </div>    
 
-    <button type="submit"
+<div><h3>Scenario Explanation</h3>
+                    <span ng-repeat="scenariosimulation in simulation.scenariosimulations">
+                        <a class="form-control-static" ui-sref="scenario.detail({id: {{scenariosimulation.id}}})"><b>{{scenariosimulation.name}}:</b></a>
+                        This {{scenariosimulation.type}} expense will cost {{scenariosimulation.annualCost | currency}} and will contribute to your deductible of {{simulation.healthplansimulations[0].deductible | currency}} leaving you with {{simulation.healthplansimulations[0].deductible - cumulativeAnnualCost()[$index] | currency}} remaining before coinsurance kicks in.
+                        This is expense {{$index}} and has a cumulative annual cost of {{cumulativeAnnualCost()[$index]}}. 
+                        </br></br>
+                    </span>
+Total costs look like this: {{cumulativeAnnualCost()}} with a total of {{cumulativeAnnualCost()}}
+</div>
+
+<button type="submit"
             onclick="window.history.back()"
             class="btn btn-info">
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
