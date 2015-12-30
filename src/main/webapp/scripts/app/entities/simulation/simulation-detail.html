@@ -58,11 +58,11 @@
             </tr>
             <tr>
                 <td>
-                    <span>Cost of Scenario</span>
+                    <span>Annual Cost of Scenario</span>
                 </td>
                 <td>
                     <span ng-repeat="scenariosimulation in simulation.scenariosimulations">
-                        {{scenariosimulation.cost | currency}}{{$last ? '' : ', '}}
+                        {{scenariosimulation.annualCost | currency}}{{$last ? '' : ', '}}
                     </span>
                 </td>
             </tr>  

@@ -14,7 +14,7 @@ angular.module('healthPlanPickerApp')
             for(var i = 0; i < $scope.simulation.scenariosimulations.length; i++)
             {
                 var scenario = $scope.simulation.scenariosimulations[i];
-                total += scenario.cost;
+                total += scenario.annualCost;
             }            
         	
         	return $scope.simulation.healthplansimulations[0].annualCost + total;

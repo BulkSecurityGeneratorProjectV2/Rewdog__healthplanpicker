@@ -12,6 +12,7 @@ import java.util.Objects;
 import com.makesnocents.healthplanpicker.domain.enumeration.ScenarioType;
 
 import com.makesnocents.healthplanpicker.domain.enumeration.FrequencyType;
+import com.makesnocents.healthplanpicker.domain.enumeration.PremiumFrequency;
 
 /**
  * A Scenario.
@@ -84,7 +85,28 @@ public class Scenario implements Serializable {
     public void setFrequency(FrequencyType frequency) {
         this.frequency = frequency;
     }
-
+    
+    /**
+     * Calculate the annual cost
+     */
+    public BigDecimal getAnnualCost()
+    {
+    	BigDecimal cost = getCost();
+    	FrequencyType frequency = getFrequency();
+    	switch (frequency) {
+		case weekly:
+			return cost.multiply(new BigDecimal(52));
+		case biweekly:
+			return cost.multiply(new BigDecimal(26));
+		case monthly:
+			return cost.multiply(new BigDecimal(12));
+		case once:
+			return cost.multiply(new BigDecimal(1));
+		default:
+			return cost;
+		}
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -110,6 +132,7 @@ public class Scenario implements Serializable {
             ", type='" + type + "'" +
             ", cost='" + cost + "'" +
             ", frequency='" + frequency + "'" +
+            ", annualCost='" + getAnnualCost() + "'" +
             '}';
     }
 }

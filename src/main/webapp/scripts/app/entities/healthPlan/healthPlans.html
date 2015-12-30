@@ -1,5 +1,5 @@
 <div>
-    <h2>HealthPlans</h2>
+    <h2>Health Plans</h2>
     <jh-alert></jh-alert>
     <div class="container">
         <div class="row">
@@ -15,38 +15,43 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th><span>ID</span></th>
                     <th><span>Name</span></th>
+                    <th><span>Type</span></th>                    
                     <th><span>Premium</span></th>
-                    <th><span>PremiumFrequency</span></th>
-                    <th><span>Type</span></th>
+                    <th><span>Premium
+                    Frequency</span></th>
                     <th><span>Deductible</span></th>
-                    <th><span>OopMax</span></th>
+                    <th><span>Out of Pocket
+                    Maximum</span></th>
                     <th><span>Coinsurance</span></th>
-                    <th><span>EmployerHSAContribution</span></th>
-                    <th><span>CopayPCP</span></th>
-                    <th><span>CopayER</span></th>
-                    <th><span>CopayPharmacy</span></th>
-                    <th><span>user</span></th>
+                    <th><span>Employer
+                    HSA
+                    Contribution</span></th>
+                    <th><span>PCP
+                    Copay</span></th>
+                    <th><span>ER
+                    Copay</span></th>
+                    <th><span>Pharmacy
+                    Copay</span></th>
+                    <th><span>Annual Cost</span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="healthPlan in healthPlans track by healthPlan.id">
-                    <td><a ui-sref="healthPlan.detail({id:healthPlan.id})">{{healthPlan.id}}</a></td>
-                    <td>{{healthPlan.name}}</td>
-                    <td>{{healthPlan.premium}}</td>
+                    <td><a ui-sref="healthPlan.detail({id:healthPlan.id})">{{healthPlan.name}}</a></td>
+                    <td translate="{{'healthPlanPickerApp.HealthPlanType.' + healthPlan.type}}">{{healthPlan.type}}</td>                    
+                    <td>{{healthPlan.premium | currency}}</td>
                     <td translate="{{'healthPlanPickerApp.PremiumFrequency.' + healthPlan.premiumFrequency}}">{{healthPlan.premiumFrequency}}</td>
-                    <td translate="{{'healthPlanPickerApp.HealthPlanType.' + healthPlan.type}}">{{healthPlan.type}}</td>
-                    <td>{{healthPlan.deductible}}</td>
-                    <td>{{healthPlan.oopMax}}</td>
-                    <td>{{healthPlan.coinsurance}}</td>
-                    <td>{{healthPlan.employerHSAContribution}}</td>
-                    <td>{{healthPlan.copayPCP}}</td>
-                    <td>{{healthPlan.copayER}}</td>
-                    <td>{{healthPlan.copayPharmacy}}</td>
+                    <td>{{healthPlan.deductible | currency}}</td>
+                    <td>{{healthPlan.oopMax | currency}}</td>
+                    <td>{{healthPlan.coinsurance | percentage}}</td>
+                    <td>{{healthPlan.employerHSAContribution | currency}}</td>
+                    <td>{{healthPlan.copayPCP | currency}}</td>
+                    <td>{{healthPlan.copayER | currency}}</td>
+                    <td>{{healthPlan.copayPharmacy | currency}}</td>
                     <td>
-                        {{healthPlan.user.login}}
+                        {{healthPlan.annualCost | currency}}
                     </td>
                     <td>
                         <button type="submit"

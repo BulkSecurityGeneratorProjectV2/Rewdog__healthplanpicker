@@ -26,6 +26,20 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label" for="field_type">Type</label>
+            <select class="form-control" name="type" ng-model="healthPlan.type" id="field_type" required>
+                <option value="cdhp">cdhp</option>
+                <option value="ppo">ppo</option>
+                <option value="hmo">hmo</option>
+            </select>
+            <div ng-show="editForm.type.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.type.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>        
+        <div class="form-group">
             <label class="control-label" for="field_premium">Premium</label>
             <input type="number" class="form-control" name="premium" id="field_premium"
                     ng-model="healthPlan.premium"
@@ -39,20 +53,6 @@
                 <option value="monthly">monthly</option>
                 <option value="annually">annually</option>
             </select>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="field_type">Type</label>
-            <select class="form-control" name="type" ng-model="healthPlan.type" id="field_type" required>
-                <option value="cdhp">cdhp</option>
-                <option value="ppo">ppo</option>
-                <option value="hmo">hmo</option>
-            </select>
-            <div ng-show="editForm.type.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.type.$error.required">
-                    This field is required.
-                </p>
-            </div>
         </div>
         <div class="form-group">
             <label class="control-label" for="field_deductible">Deductible</label>
@@ -114,11 +114,11 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-hide="healthPlan.type != 'cdhp'">
             <label class="control-label" for="field_employerHSAContribution">EmployerHSAContribution</label>
             <input type="number" class="form-control" name="employerHSAContribution" id="field_employerHSAContribution"
                     ng-model="healthPlan.employerHSAContribution"
-                    min="0" />
+                    min="0"/>
             <div ng-show="editForm.employerHSAContribution.$invalid">
                 <p class="help-block"
                     ng-show="editForm.employerHSAContribution.$error.min" translate-value-min="0">
@@ -130,7 +130,7 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-hide="healthPlan.type == 'cdhp' || !healthPlan.type">
             <label class="control-label" for="field_copayPCP">CopayPCP</label>
             <input type="number" class="form-control" name="copayPCP" id="field_copayPCP"
                     ng-model="healthPlan.copayPCP"
@@ -146,13 +146,13 @@
                 </p>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-hide="healthPlan.type == 'cdhp' || !healthPlan.type">
             <label class="control-label" for="field_copayER">CopayER</label>
             <input type="number" class="form-control" name="copayER" id="field_copayER"
                     ng-model="healthPlan.copayER"
                      />
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-hide="healthPlan.type == 'cdhp' || !healthPlan.type">
             <label class="control-label" for="field_copayPharmacy">CopayPharmacy</label>
             <input type="number" class="form-control" name="copayPharmacy" id="field_copayPharmacy"
                     ng-model="healthPlan.copayPharmacy"
