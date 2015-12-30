@@ -52,10 +52,28 @@
                 </td>
                 <td>
                     <span ng-repeat="healthplansimulation in simulation.healthplansimulations">
-                        <a class="form-control-static" ui-sref="healthPlan.detail({id: {{healthplansimulation.id}}})">{{healthplansimulation.name}}</a>{{$last ? '' : ', '}}
+                        {{healthplansimulation.annualCost | currency}}</a>{{$last ? '' : ', '}}
                     </span>
                 </td>
-            </tr>            
+            </tr>
+            <tr>
+                <td>
+                    <span>Cost of Scenario</span>
+                </td>
+                <td>
+                    <span ng-repeat="scenariosimulation in simulation.scenariosimulations">
+                        {{scenariosimulation.cost | currency}}{{$last ? '' : ', '}}
+                    </span>
+                </td>
+            </tr>  
+            <tr>
+                <td>
+                    <span>New Annual Cost</span>
+                </td>
+                <td>                    
+                        <span>{{newAnnualCost() | currency}}</span>
+                </td>
+            </tr>                                 
             </tbody>
         </table>
     </div>

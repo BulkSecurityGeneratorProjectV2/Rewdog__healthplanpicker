@@ -18,7 +18,8 @@ angular.module('healthPlanPickerApp').controller(
 						$scope.healthPlan = result;
 					});
 			$scope.$on('$destroy', unsubscribe);
-			
+
+			//This function also exists in the java object			
 			$scope.annualCost = function(){
 				switch ($scope.healthPlan.premiumFrequency) {
 				case "weekly":

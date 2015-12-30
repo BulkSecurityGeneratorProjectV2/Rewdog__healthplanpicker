@@ -1,19 +1,28 @@
 package com.makesnocents.healthplanpicker.domain;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
-
-import com.makesnocents.healthplanpicker.domain.enumeration.PremiumFrequency;
-
 import com.makesnocents.healthplanpicker.domain.enumeration.HealthPlanType;
+import com.makesnocents.healthplanpicker.domain.enumeration.PremiumFrequency;
 
 /**
  * A HealthPlan.
@@ -180,6 +189,27 @@ public class HealthPlan implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+    
+    /**
+     * Get Annual Costs
+     */
+    public BigDecimal getAnnualCost()
+    {
+    	BigDecimal premium = getPremium();
+    	PremiumFrequency frequency = getPremiumFrequency();
+    	switch (frequency) {
+		case weekly:
+			return premium.multiply(new BigDecimal(52));
+		case biweekly:
+			return premium.multiply(new BigDecimal(26));
+		case monthly:
+			return premium.multiply(new BigDecimal(12));
+		case annually:
+			return premium.multiply(new BigDecimal(1));
+		default:
+			return premium;
+		}
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -213,6 +243,7 @@ public class HealthPlan implements Serializable {
             ", copayPCP='" + copayPCP + "'" +
             ", copayER='" + copayER + "'" +
             ", copayPharmacy='" + copayPharmacy + "'" +
+            ", annualCost='" + getAnnualCost() + "'" +
             '}';
     }
 }
